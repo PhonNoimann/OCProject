@@ -25,3 +25,4 @@ opt = SolverFactory('glpk')
 result_obj = opt.solve(model, tee = True)
 
 model.pprint()
+#modifica
