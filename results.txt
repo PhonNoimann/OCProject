@@ -1,0 +1,4 @@
+Variable x1
+   None 3.0
+Variable x2
+   None 3.5
