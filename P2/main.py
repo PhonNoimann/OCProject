@@ -4,6 +4,7 @@ import pandas
 import os
 import fnmatch
 import numpy
+import matplotlib.pyplot as plt
 from pyomo.environ import *
 
 # Check if data for the objective functions and constraints exist, if not create them
@@ -44,8 +45,11 @@ for z in numpy.linspace(0,1,50):
     with open('results.txt',mode='w') as results_file:
         for v in model.component_objects(Var, active=True):
             results_file.write('Variables: \n')
-            varobject = model.x
-            for index in varobject:
+            varobject = getattr(model, str(v))
+            for index in A:
                 results_file.write('   '+str(index) + ' ' + str(varobject[index].value) + '\n')
-    
-
+x1 = c_file.T.columns
+x2 = c_file.T.columns
+fig = plt.figure()
+plt.plot(x1, x2)
+fig.savefig('test.png')
