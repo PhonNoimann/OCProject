@@ -1,3 +1,0 @@
-Variable x
-   x1 3.0
-   x2 3.5

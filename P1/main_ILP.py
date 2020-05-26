@@ -20,7 +20,7 @@ A = obj_file.columns.tolist()
 model = ConcreteModel()
 
 # Variable initialization
-model.x = Var( A, within = NonNegativeReals)
+model.x = Var( A, within = NonNegativeIntegers)
 
 # Objective function
 
@@ -39,11 +39,11 @@ results = opt.solve(model, tee=True)
 results.write()
 model.solutions.load_from(results)
 
-with open('results2.txt',mode='w') as results_file:
+with open('results_ILP.txt',mode='w') as results_file:
     for v in model.component_objects(Var, active=True):
         results_file.write('Variable ' + str(v) + '\n')
         varobject = getattr(model, str(v))
         for index in varobject:
-            results_file.write('   '+str(index) + ' ' + str(varobject[index].value) + '\n')
+            results_file.write('   '+str(index) + ' = ' + str(varobject[index].value) + '\n')
     
 
