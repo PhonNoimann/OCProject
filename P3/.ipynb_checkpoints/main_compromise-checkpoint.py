@@ -21,7 +21,7 @@ if ('constraints.csv' in files)==False or ('objectives.csv' in files)==False:
 obj_file = pandas.read_csv('objectives.csv')
 c_file = pandas.read_csv('constraints.csv')
 A = obj_file.columns.tolist()
-B = sum(1 for line in obj_file)
+B = len(obj_file)
 print(obj_file)
 print(c_file)
 print(A)
