@@ -7,6 +7,7 @@ import fnmatch
 import numpy as np
 import matplotlib.pyplot as plt
 from pyomo.environ import *
+from functions import feasPlot
 
 # Check if data for the objective functions and constraints exists, if not it creates them
 files = os.listdir()
@@ -23,6 +24,8 @@ print(obj_file)
 print(c_file)
 print(A)
 print(B)
+print(np.array(obj_file))
+print(np.array(c_file))
 
 # Create the model
 model = ConcreteModel()
@@ -49,9 +52,14 @@ for z in np.linspace(0,1,5):
     z2.append(value(model.x['x1'])*value(obj_file['x1'][1])+value(model.x['x2'])*value(obj_file['x2'][1]))
     model.del_component(model.obj)
 
-fig1, ax1 = plt.subplots()
+a=np.array([[2.,6.],[3.,2.],[4.,1.]])
+b=np.array([27.,16.,18.])
+fig1, ax1 = feasPlot(a,b,x1,x2)
+
+
+#fig1, ax1 = plt.subplots()
 ax1.plot(x1,x2,'.r')
-ax1.plot(x1,x2)
+ax1.plot(x1,x2,'b')
 ax1.set_title('Pareto frontier Weighting method x\'s values')
 ax1.set_xlabel('x1')
 ax1.set_ylabel('x2')
