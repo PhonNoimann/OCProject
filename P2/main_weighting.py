@@ -77,7 +77,7 @@ plt.savefig('pareto_weighting_x.png')
 
 fig2, ax2 = plt.subplots()
 ax2.plot(z1,z2,'.r')
-ax2.plot(z1,z2,)
+ax2.plot(z1,z2,'b')
 ax2.set_title('Pareto frontier Weighting method z\'s values')
 ax2.set_xlabel('z1')
 ax2.set_ylabel('z2')
