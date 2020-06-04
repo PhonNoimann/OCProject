@@ -24,8 +24,7 @@ print(obj_file)
 print(c_file)
 print(A)
 print(B)
-print(np.array(obj_file))
-print(np.array(c_file))
+
 
 # Create the model
 model = ConcreteModel()
@@ -52,15 +51,17 @@ for z in np.linspace(0,1,5):
     z2.append(value(model.x['x1'])*value(obj_file['x1'][1])+value(model.x['x2'])*value(obj_file['x2'][1]))
     model.del_component(model.obj)
 
-a=np.array([[2.,6.],[3.,2.],[4.,1.]])
-b=np.array([27.,16.,18.])
+
+arr = np.array(c_file)
+a = np.array(arr[:,[0,1]], dtype='float')
+b = np.array(arr[:,3], dtype='float')
+
+
 fig1, ax1 = feasPlot(a,b,x1,x2)
 
-
-#fig1, ax1 = plt.subplots()
-ax1.plot(x1,x2,'.r')
+ax1.plot(x1,x2,'*r')
 ax1.plot(x1,x2,'b')
-ax1.set_title('Pareto frontier Weighting method x\'s values')
+#ax1.set_title('Pareto frontier Weighting method x\'s values')
 ax1.set_xlabel('x1')
 ax1.set_ylabel('x2')
 ax1.grid(True)
