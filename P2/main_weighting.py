@@ -58,40 +58,52 @@ b = np.array(c_arr[:,3], dtype='float')
 
 obj_arr = np.array(obj_file)
 fig1, ax1, Feas1, Feas2 = feasPlotx(a,b,x1,x2)
-Feasz1, Feasz2 = feasPlotz(obj_arr, Feas1, Feas2)
 
 
 ax1.plot(x1,x2,'*r', label = 'Pareto solution')
 ax1.plot(x1,x2,'b', label = 'Pareto frontier')
-ax1.set_xlabel('x1')
-ax1.set_ylabel('x2')
-ax1.grid(True)
 plt.legend()
 
-for x,y in zip(x1,x2):
-    label = "(" + "{:.1f}".format(x) + "," + "{:.1f}".format(y) + ")"
-    plt.annotate(label, # this is the text
-                 (x,y), # this is the point to label
-                 textcoords="offset points", # how to position the text
-                 xytext=(5,-5)) # distance from text to points (x,y)
+
+label = "(" + "{:.1f}".format(x1[0]) + "," + "{:.1f}".format(x2[0]) + ")"
+plt.annotate(label, # this is the text
+             (x1[0],x2[0]), # this is the point to label
+             textcoords="offset points", # how to position the text
+             xytext=(5,7)) # distance from text to points (x,y)
+label = "(" + "{:.1f}".format(x1[2]) + "," + "{:.1f}".format(x2[2]) + ")"
+plt.annotate(label, # this is the text
+             (x1[2],x2[2]), # this is the point to label
+             textcoords="offset points", # how to position the text
+             xytext=(5,1)) # distance from text to points (x,y)
+label = "(" + "{:.1f}".format(x1[4]) + "," + "{:.1f}".format(x2[4]) + ")"
+plt.annotate(label, # this is the text
+             (x1[4],x2[4]), # this is the point to label
+             textcoords="offset points", # how to position the text
+             xytext=(-42,-10)) # distance from text to points (x,y)
 
 plt.savefig('pareto_weighting_x.png')
 
-fig2, ax2 = plt.subplots()
-ax2.plot(z1,z2,'.r')
-ax2.plot(z1,z2,'b')
-ax2.set_title('Pareto frontier Weighting method z\'s values')
-ax2.set_xlabel('z1')
-ax2.set_ylabel('z2')
-ax2.grid(True)
-for x,y in zip(z1,z2):
+fig2, ax2, Feasz1, Feasz2 = feasPlotz(obj_arr, Feas1, Feas2)
 
-    label = "(" + "{:.1f}".format(x) + "," + "{:.1f}".format(y) + ")"
+ax2.plot(z1,z2,'*r', label = 'Pareto solution')
+ax2.plot(z1,z2,'b', label = 'Pareto frontier')
+plt.legend()
 
-    plt.annotate(label, # this is the text
-                 (x,y), # this is the point to label
-                 textcoords="offset points", # how to position the text
-                 xytext=(0,-5)) # distance from text to points (x,y)
+label = "(" + "{:.1f}".format(z1[0]) + "," + "{:.1f}".format(z2[0]) + ")"
+plt.annotate(label, # this is the text
+             (z1[0],z2[0]), # this is the point to label
+             textcoords="offset points", # how to position the text
+             xytext=(-50,-5)) # distance from text to points (x,y)
+label = "(" + "{:.1f}".format(z1[2]) + "," + "{:.1f}".format(z2[2]) + ")"
+plt.annotate(label, # this is the text
+             (z1[2],z2[2]), # this is the point to label
+             textcoords="offset points", # how to position the text
+             xytext=(5,0)) # distance from text to points (x,y)
+label = "(" + "{:.1f}".format(z1[4]) + "," + "{:.1f}".format(z2[4]) + ")"
+plt.annotate(label, # this is the text
+             (z1[4],z2[4]), # this is the point to label
+             textcoords="offset points", # how to position the text
+             xytext=(5,-20)) # distance from text to points (x,y)
 
 plt.savefig('pareto_weighting_z.png')
 

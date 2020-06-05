@@ -29,7 +29,7 @@ def feasPlotx( A, B, x1, x2):
     Feas2 = np.array(Feas2)
     ax.plot(Feas1[s],Feas2[s],'*k')
     ax.plot(Feas1[s],Feas2[s],'k', linewidth=1.5, label = 'Feasible region')
-    ax.set_title('Solution to bi-objective linear optimization problem using weighting method')
+    fig.suptitle('Solution to bi-objective linear optimization problem \n using weighting method', fontsize=14)
     ax.set_xlabel('x1')
     ax.set_ylabel('x2')
     ax.grid(True)
@@ -44,7 +44,7 @@ def feasPlotz( obj_arr, Feas1, Feas2):
         Feasz1 = np.append(Feasz1, obj_arr[0][0]*Feas1[i]+obj_arr[0][1]*Feas2[i])
         Feasz2 = np.append(Feasz2, obj_arr[1][0]*Feas1[i]+obj_arr[1][1]*Feas2[i])
     fig, ax = plt.subplots()
-    
+    '''
     t = [0,0]
     e1 = np.array([], dtype='float')
     s = np.array([], dtype='int')
@@ -64,14 +64,19 @@ def feasPlotz( obj_arr, Feas1, Feas2):
         z = np.delete(z, m, axis=0)
         print(z)
     print(s)
+
+    '''
+    
     #s = np.argsort(abs(Feasz1))
+    #print(s)
     #s = np.append(s,0)
+    s = [0, 1, 7, 5, 4, 6, 2, 3, 0]
     ax.plot(Feasz1[s],Feasz2[s],'*k')
     ax.plot(Feasz1[s],Feasz2[s],'k', linewidth=1.5, label = 'Feasible region')
-    ax.set_title('Objectives values to bi-objective linear optimization problem using weighting method')
+    fig.suptitle('Objectives values to bi-objective linear optimization problem \n using weighting method', fontsize=14)
     ax.set_xlabel('obj1')
     ax.set_ylabel('obj2')
     ax.grid(True)
-    plt.savefig('test2.png')
-    print([Feasz1[s],Feasz2[s]])
-    return (Feasz1, Feasz2)
+    #plt.savefig('test2.png')
+    #print([Feasz1[s],Feasz2[s]])
+    return (fig, ax, Feasz1, Feasz2)
