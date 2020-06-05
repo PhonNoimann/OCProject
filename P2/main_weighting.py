@@ -59,12 +59,13 @@ b = np.array(arr[:,3], dtype='float')
 
 fig1, ax1 = feasPlot(a,b,x1,x2)
 
-ax1.plot(x1,x2,'*r')
-ax1.plot(x1,x2,'b')
+ax1.plot(x1,x2,'*r', label = 'Pareto solution')
+ax1.plot(x1,x2,'b', label = 'Pareto frontier')
 #ax1.set_title('Pareto frontier Weighting method x\'s values')
 ax1.set_xlabel('x1')
 ax1.set_ylabel('x2')
 ax1.grid(True)
+plt.legend()
 
 for x,y in zip(x1,x2):
     label = "(" + "{:.1f}".format(x) + "," + "{:.1f}".format(y) + ")"
