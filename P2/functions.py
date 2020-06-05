@@ -29,7 +29,6 @@ def feasPlotx( A, B, x1, x2):
     Feas2 = np.array(Feas2)
     ax.plot(Feas1[s],Feas2[s],'*k')
     ax.plot(Feas1[s],Feas2[s],'k', linewidth=1.5, label = 'Feasible region')
-    fig.suptitle('Solution to bi-objective linear optimization problem \n using weighting method', fontsize=14)
     ax.set_xlabel('x1')
     ax.set_ylabel('x2')
     ax.grid(True)
@@ -67,16 +66,67 @@ def feasPlotz( obj_arr, Feas1, Feas2):
 
     '''
     
-    #s = np.argsort(abs(Feasz1))
-    #print(s)
-    #s = np.append(s,0)
     s = [0, 1, 7, 5, 4, 6, 2, 3, 0]
     ax.plot(Feasz1[s],Feasz2[s],'*k')
     ax.plot(Feasz1[s],Feasz2[s],'k', linewidth=1.5, label = 'Feasible region')
-    fig.suptitle('Objectives values to bi-objective linear optimization problem \n using weighting method', fontsize=14)
     ax.set_xlabel('obj1')
     ax.set_ylabel('obj2')
     ax.grid(True)
     #plt.savefig('test2.png')
     #print([Feasz1[s],Feasz2[s]])
     return (fig, ax, Feasz1, Feasz2)
+
+def Plots(c_arr, obj_arr, x1, x2, z1, z2, text):
+    a = np.array(c_arr[:,[0,1]], dtype='float')
+    b = np.array(c_arr[:,3], dtype='float')
+    fig1, ax1, Feas1, Feas2 = feasPlotx(a,b,x1,x2)
+
+    fig1.suptitle('Solution to bi-objective linear optimization problem' + '\n' + 'using ' + str(text) + ' method', fontsize=14)
+    ax1.plot(x1,x2,'*r', label = 'Pareto solution')
+    ax1.plot(x1,x2,'b', label = 'Pareto frontier')
+    plt.legend()
+
+
+    label = "(" + "{:.1f}".format(x1[0]) + "," + "{:.1f}".format(x2[0]) + ")"
+    plt.annotate(label, # this is the text
+                (x1[0],x2[0]), # this is the point to label
+                textcoords="offset points", # how to position the text
+                xytext=(5,7)) # distance from text to points (x,y)
+    label = "(" + "{:.1f}".format(x1[2]) + "," + "{:.1f}".format(x2[2]) + ")"
+    plt.annotate(label, # this is the text
+                (x1[2],x2[2]), # this is the point to label
+                textcoords="offset points", # how to position the text
+                xytext=(5,1)) # distance from text to points (x,y)
+    label = "(" + "{:.1f}".format(x1[4]) + "," + "{:.1f}".format(x2[4]) + ")"
+    plt.annotate(label, # this is the text
+                (x1[4],x2[4]), # this is the point to label
+                textcoords="offset points", # how to position the text
+                xytext=(-42,-10)) # distance from text to points (x,y)
+
+    plt.savefig('pareto_' + str(text) + '_x.png')
+
+    fig2, ax2, Feasz1, Feasz2 = feasPlotz(obj_arr, Feas1, Feas2)
+
+    fig2.suptitle('Objectives values to bi-objective linear optimization problem' + '\n' + 'using ' + str(text) + ' method', fontsize=14)
+    ax2.plot(z1,z2,'*r', label = 'Pareto solution')
+    ax2.plot(z1,z2,'b', label = 'Pareto frontier')
+    plt.legend()
+
+    label = "(" + "{:.1f}".format(z1[0]) + "," + "{:.1f}".format(z2[0]) + ")"
+    plt.annotate(label, # this is the text
+                (z1[0],z2[0]), # this is the point to label
+                textcoords="offset points", # how to position the text
+                xytext=(-50,-5)) # distance from text to points (x,y)
+    label = "(" + "{:.1f}".format(z1[2]) + "," + "{:.1f}".format(z2[2]) + ")"
+    plt.annotate(label, # this is the text
+                (z1[2],z2[2]), # this is the point to label
+                textcoords="offset points", # how to position the text
+                xytext=(5,0)) # distance from text to points (x,y)
+    label = "(" + "{:.1f}".format(z1[4]) + "," + "{:.1f}".format(z2[4]) + ")"
+    plt.annotate(label, # this is the text
+                (z1[4],z2[4]), # this is the point to label
+                textcoords="offset points", # how to position the text
+                xytext=(5,-20)) # distance from text to points (x,y)
+
+    plt.savefig('pareto_' + str(text) + '_z.png')
+
