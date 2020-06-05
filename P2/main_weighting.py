@@ -7,7 +7,7 @@ import fnmatch
 import numpy as np
 import matplotlib.pyplot as plt
 from pyomo.environ import *
-from functions import feasPlot
+from functions import *
 
 # Check if data for the objective functions and constraints exists, if not it creates them
 files = os.listdir()
@@ -52,16 +52,17 @@ for z in np.linspace(0,1,5):
     model.del_component(model.obj)
 
 
-arr = np.array(c_file)
-a = np.array(arr[:,[0,1]], dtype='float')
-b = np.array(arr[:,3], dtype='float')
+c_arr = np.array(c_file)
+a = np.array(c_arr[:,[0,1]], dtype='float')
+b = np.array(c_arr[:,3], dtype='float')
 
+obj_arr = np.array(obj_file)
+fig1, ax1, Feas1, Feas2 = feasPlotx(a,b,x1,x2)
+Feasz1, Feasz2 = feasPlotz(obj_arr, Feas1, Feas2)
 
-fig1, ax1 = feasPlot(a,b,x1,x2)
 
 ax1.plot(x1,x2,'*r', label = 'Pareto solution')
 ax1.plot(x1,x2,'b', label = 'Pareto frontier')
-#ax1.set_title('Pareto frontier Weighting method x\'s values')
 ax1.set_xlabel('x1')
 ax1.set_ylabel('x2')
 ax1.grid(True)
