@@ -65,7 +65,8 @@ def feasPlotz( obj_arr, Feas1, Feas2):
     print(s)
 
     '''
-    
+    print(Feasz1)
+    print(Feasz2)
     s = [0, 1, 7, 5, 4, 6, 2, 3, 0]
     ax.plot(Feasz1[s],Feasz2[s],'*k')
     ax.plot(Feasz1[s],Feasz2[s],'k', linewidth=1.5, label = 'Feasible region')
